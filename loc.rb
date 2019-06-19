@@ -3,10 +3,10 @@ require 'open3'
 require 'cliver'
 require 'dotenv'
 
-if ARGV.count != 1
-  puts "Usage: script/count [ORG NAME]"
-  exit 1
-end
+#if ARGV.count != 1
+#  puts "Usage: script/count [USERNAME]"
+#  exit 1
+#end
 
 Dotenv.load
 
@@ -29,7 +29,7 @@ end
 client = Octokit::Client.new access_token: ENV["GITHUB_TOKEN"]
 client.auto_paginate = true
 
-repos = client.organization_repositories(ARGV[0].strip, type: 'sources')
+repos = client.repos()
 puts "Found #{repos.count} repos. Counting..."
 
 reports = []
